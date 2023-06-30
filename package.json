@@ -9,7 +9,7 @@
     "watch": "yarn tsc -w",
     "serve": "node --max-old-space-size=256 dist/server.js",
     "serve:inspect": "node --max-old-space-size=256 --inspect dist/server.js",
-    "autoc": "autocannon http://localhost:3000 -d 60 -c 100"
+    "autocannon:start": "autocannon http://localhost:3000 -d 60 -c 100"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.1",

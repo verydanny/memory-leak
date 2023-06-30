@@ -35,6 +35,30 @@ export async function renderApp(req: Request, res: Response) {
   )
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // export function renderAppInitialize() {
 // 
 // }
