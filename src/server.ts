@@ -6,6 +6,6 @@ const app = express()
 
 app.get('*', renderApp)
 
-app.listen(3000, () =>
+app.listen(port, () =>
   console.log(`Server starter on http://localhost:${port}`)
 )
