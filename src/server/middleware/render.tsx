@@ -4,16 +4,19 @@ import { type Request, type Response } from 'express'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { App } from '../../components/app.js'
 
-const sessionUsers = new Set()
+const dummyCache = new Map<string, string>()
 
 export async function renderApp(req: Request, res: Response) {
   const newUserId = uuid()
 
+  if (dummyCache.has(newUserId)) {
+    return res.send(dummyCache.get(newUserId))
+  }
+
   const app = renderToStaticMarkup(<App />)
+  dummyCache.set(newUserId, app)
 
-  sessionUsers.add(`${newUserId}${app}`)
-
-  res.send(
+  return res.send(
     html`
       <!DOCTYPE html>
       <html>
@@ -31,3 +34,7 @@ export async function renderApp(req: Request, res: Response) {
     `
   )
 }
+
+// export function renderAppInitialize() {
+// 
+// }

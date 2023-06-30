@@ -3,12 +3,15 @@ import { v1 as uuid } from 'uuid';
 import { html } from 'common-tags';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { App } from '../../components/app.js';
-const sessionUsers = new Set();
+const dummyCache = new Map();
 export async function renderApp(req, res) {
     const newUserId = uuid();
+    if (dummyCache.has(newUserId)) {
+        return res.send(dummyCache.get(newUserId));
+    }
     const app = renderToStaticMarkup(_jsx(App, {}));
-    sessionUsers.add(`${newUserId}${app}`);
-    res.send(html `
+    dummyCache.set(newUserId, app);
+    return res.send(html `
       <!DOCTYPE html>
       <html>
         <head>
